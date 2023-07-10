@@ -69,6 +69,10 @@ func get_connection_state() -> int:
 	return plugin.getConnectionState()
 
 
+func is_ready() -> bool:
+	return true if plugin != null and plugin.getConnectionState() == ConnectionState.CONNECTED else false
+
+
 func query_sku_details(product_SKUs : Array[String], purchase_type : int) -> void:
 	plugin.querySkuDetails(product_SKUs, _purchase_types[purchase_type])
 
