@@ -14,7 +14,7 @@ Here's a sample workflow, but you can achieve the same result in other ways and/
 <br>
 
 2. Connect to the main signals.
-```
+```gdscript
 func _ready():
     GodotGooglePlayBilling.connected.connect(your_function)
     GodotGooglePlayBilling.purchases_updated.connect(_on_purchase)
@@ -23,7 +23,7 @@ func _ready():
 
 3. Retrieve user's "inapp" (or "subs") purchases.
 
-```
+```gdscript
 func your_function():
     GodotGooglePlayBilling.query_purchases(GodotGooglePlayBilling.PurchaseTypes.INAPP)
     var purchases : Array[GooglePlayPurchase] = await GodotGooglePlayBilling.purchases_query_response
@@ -33,7 +33,7 @@ func your_function():
 <br>
 
 4. Start the purchase flow.
-```
+```gdscript
 func user_wants_to_buy_something():
 	GodotGooglePlayBilling.query_sku_details(["something"], GodotGooglePlayBilling.PurchaseTypes.INAPP)
 	var query : Array[GooglePlayProduct] = await GodotGooglePlayBilling.sku_query_response
@@ -42,7 +42,7 @@ func user_wants_to_buy_something():
 <br>
 
 5. When the user has completed the purchase, continue the purchase flow (remember to connect to the signal like in step 1). You can __consume__ the purchase if you want the user to be able to buy it more than once, or __acknowledge__ it to keep it in user's purchases for later use (like granting a persistent benefit). If you do neither of those, the purchase will be canceled after some time and the user will be refunded.
-```
+```gdscript
 func _on_purchase(purchases : Array[GooglePlayPurchase]):
     for purchase in purchases:
         if purchase.sku == "something":
